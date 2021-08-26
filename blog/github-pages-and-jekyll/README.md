@@ -1,12 +1,10 @@
 ---
-# META DATA
 title: Github Pages + Jekyll 기반 블로그 만들기 (1)
 subtitle: Github Pages 호스팅 및 Jekyll 설치하기
 date: "2019-10-21"
 categories: blog
 tags: blog jekyll github
 seriesId: 1
-# SETTINGS for Services
 ---
 
 ![github and jekyll](./img/github_jekyll.jpg)
