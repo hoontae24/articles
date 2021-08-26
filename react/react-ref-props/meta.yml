@@ -1,0 +1,7 @@
+# META DATA
+
+title: React 컴포넌트에 ref props 전달하기
+subtitle: (feat. forwardRef, useImperativeHandle)
+date: 2021-08-18
+category: react
+tags: [react, frontend]
