@@ -1,9 +1,9 @@
 ---
 title: 리액트 컴포넌트 Rerendering 파헤치기
 # subtitle:
-date: "2020-03-15"
-categories: react
-tags: react frontend
+date: 2020-03-15
+category: react
+tags: [react, frontend]
 ---
 
 ![react render props](./img/react_render_props.png)

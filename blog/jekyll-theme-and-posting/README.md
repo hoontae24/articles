@@ -1,9 +1,9 @@
 ---
 title: Github Pages + Jekyll 기반 블로그 만들기 (2)
 subtitle: Jekyll Theme 적용 및 첫번째 포스트 작성하기
-date: "2019-10-26"
-categories: blog
-tags: blog jekyll github
+date: 2019-10-26
+category: blog
+tags: [blog, jekyll, github]
 seriesId: 1
 ---
 

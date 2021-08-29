@@ -1,9 +1,9 @@
 ---
 title: Javascript의 비동기 처리, async/await를 알아보자
 # subtitle:
-date: "2020-01-11"
-categories: javascript
-tags: javascript promise async/await
+date: 2020-01-11
+category: javascript
+tags: [javascript, promise, async/await]
 ---
 
 ![async and await](./img/async_await.png)

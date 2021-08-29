@@ -1,9 +1,9 @@
 ---
 title: AWS EC2 + RDS에 Node.js 서버 배포하기(Ubuntu, Mysql)
 # subtitle:
-date: "2020-02-23"
-categories: aws
-tags: aws ec2 rds node mysql
+date: 2020-02-23
+category: aws
+tags: [aws, ec2, rds]
 ---
 
 ![aws, node](./img/aws_node.png)

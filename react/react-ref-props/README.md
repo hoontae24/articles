@@ -1,9 +1,9 @@
 ---
 title: React 컴포넌트에 ref props 전달하기
 subtitle: (feat. forwardRef, useImperativeHandle)
-date: "2021-08-18"
-categories: react
-tags: ["react", "frontend"]
+date: 2021-08-18
+category: react
+tags: [react, frontend]
 ---
 
 ![react ref props](./img/react-ref-props.png)

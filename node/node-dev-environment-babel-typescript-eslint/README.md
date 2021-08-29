@@ -1,9 +1,9 @@
 ---
 title: Node와 Babel + Typesciprt + Eslint 개발 환경 구성하기
 # subtitle:
-date: "2020-02-07"
-categories: node
-tags: node babel typescript eslint
+date: 2020-02-07
+category: node
+tags: [node, babel, typescript, eslint]
 ---
 
 ![babel, typescript, eslint](./img/babel_typescript_eslint.png)

@@ -1,9 +1,9 @@
 ---
 title: 자주 사용하는 Git 명령어 정리
 # subtitle:
-date: "2020-03-08"
-categories: git
-tags: git
+date: 2020-03-08
+category: git
+tags: [git]
 ---
 
 ![git](./img/git.png)

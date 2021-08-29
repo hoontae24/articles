@@ -1,9 +1,9 @@
 ---
 title: Javascript의 비동기 처리, Promise를 알아보자
 subtitle: Promise의 개념과 기본적인 사용법
-date: "2019-12-28"
-categories: javascript
-tags: javascript promise
+date: 2019-12-28
+category: javascript
+tags: [javascript, promise]
 ---
 
 ![promise](./img/promise.png)
