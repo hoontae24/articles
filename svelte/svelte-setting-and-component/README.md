@@ -1,7 +1,7 @@
 ---
 title: Svelte로 만드는 TODO-App (1)
 subtitle: Svelte 설치하기 / 컴포넌트 구성하기
-date: 2019-11-22
+date: 2019-11-17
 category: svelte
 tags: [javascript, frontend, svelte]
 seriesId: 2
