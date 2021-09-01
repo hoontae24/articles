@@ -1,7 +1,7 @@
 ---
 title: Svelte로 만드는 TODO-App (2)
 subtitle: 데이터 Store 구현하기 / 간단한 CRUD 구현하기
-date: 2019-11-17
+date: 2019-11-22
 category: svelte
 tags: [javascript, frontend, svelte]
 seriesId: 2
