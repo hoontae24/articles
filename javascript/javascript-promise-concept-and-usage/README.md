@@ -207,7 +207,7 @@ promise
 ```js
 const promise1 = new Promise(res => res(1))
 const promise2 = new Promise(res => res(2))
-const promise3 = new Promise((r, j) => j(3))
+const promise3 = new Promise((r, j) => r(3))
 const promise = Promise.all([promise1, promise2, promise3])
 promise.then(value => {
   console.log(value) // output: [1, 2, 3]
