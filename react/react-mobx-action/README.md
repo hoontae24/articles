@@ -3,7 +3,7 @@ title: Mobx의 상태 변화, Action을 알아보자(feat. 비동기 Action)
 # subtitle:
 date: 2020-01-30
 category: react
-tags: [mobx react]
+tags: [mobx, react]
 ---
 
 ![mobx](./img/mobx.png)
