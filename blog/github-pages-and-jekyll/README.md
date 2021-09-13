@@ -104,7 +104,7 @@ _(commit된 목록이 생겼으면 성공)_
 ## **4. 호스팅 된 블로그 확인하기**
 
 이제 자신이 저장소 이름으로 접속해보면 블로그를 확인할 수 있다.  
-(내 경우엔 [https://hoontae24.github.io/](https://hoontae24.github.io/))
+~~(내 경우엔 [https://hoontae24.github.io/](https://hoontae24.github.io/), 주소 형식만 참고해주세요. 결과물은 변경되었습니다.)~~
 
 아직은 텅 빈 블로그지만 이제 몇가지 설정만 하면 멀쩡한 블로그가 될 것 같다.
 
