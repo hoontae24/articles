@@ -1,6 +1,6 @@
 ---
 title: 자바스크립트, 딕셔너리를 만드는 가장 빠른 방법은?
-# subtitle:
+description:
 date: 2020-04-12
 category: javascript
 tags: [javascript, data structure]

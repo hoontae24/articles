@@ -1,6 +1,6 @@
 ---
-title: Github Pages + Jekyll 기반 블로그 만들기 (2)
-subtitle: Jekyll Theme 적용 및 첫번째 포스트 작성하기
+title: 블로그 만들기, Jekyll Theme 적용 및 첫번째 포스트 작성하기
+description: 나만의 블로그를 위해 이미 만들어져 있는 Jekyll Theme를 가져와서 적용해봅니다. 그리고 Markdown으로 블로그의 첫번째 포스트를 쉽게 작성해봅니다.
 date: 2019-10-26
 category: blog
 tags: [blog, jekyll, github]

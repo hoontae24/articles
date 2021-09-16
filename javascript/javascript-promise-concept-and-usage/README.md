@@ -1,6 +1,6 @@
 ---
 title: Javascript의 비동기 처리, Promise를 알아보자
-subtitle: Promise의 개념과 기본적인 사용법
+description: 싱글스레드 환경에서 동작하는 자바스크립트의 비동기 처리를 하기 위한 Promise의 개념과 기본적인 사용법을 알아보겠습니다.
 date: 2019-12-28
 category: javascript
 tags: [javascript, promise]

@@ -1,6 +1,6 @@
 ---
 title: Node와 Babel + Typesciprt + Eslint 개발 환경 구성하기
-# subtitle:
+description:
 date: 2020-02-07
 category: node
 tags: [node, babel, typescript, eslint]

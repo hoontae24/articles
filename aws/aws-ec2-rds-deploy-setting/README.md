@@ -1,6 +1,6 @@
 ---
 title: AWS EC2 + RDS에 Node.js 서버 배포하기(Ubuntu, Mysql)
-# subtitle:
+description:
 date: 2020-02-23
 category: aws
 tags: [aws, ec2, rds]

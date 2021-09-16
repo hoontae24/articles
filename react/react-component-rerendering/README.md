@@ -1,6 +1,6 @@
 ---
 title: 리액트 컴포넌트 Rerendering 파헤치기
-# subtitle:
+description:
 date: 2020-03-15
 category: react
 tags: [react, frontend]

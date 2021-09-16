@@ -1,6 +1,6 @@
 ---
-title: Github Pages + Jekyll 기반 블로그 만들기 (1)
-subtitle: Github Pages 호스팅 및 Jekyll 설치하기
+title: 블로그 만들기, Github Pages 호스팅 및 Jekyll 설치
+description: Github Pages와 Jekyll을 이용하여 나만의 블로그를 만들어 보겠습니다. jekyll을 이용하여 정적 사이트 블로그를 만들고, Github pages를 통해 무료로 사이트를 배포합니다.
 date: 2019-10-21
 category: blog
 tags: [blog, jekyll, github]

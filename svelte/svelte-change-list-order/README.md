@@ -1,6 +1,6 @@
 ---
-title: Svelte로 만드는 TODO-App (3)
-subtitle: Item 순서 변경하기
+title: Svelte로 만드는 TODO-App (3), Item 순서 변경하기
+description:
 date: 2019-11-29
 category: svelte
 tags: [javascript, frontend, svelte]

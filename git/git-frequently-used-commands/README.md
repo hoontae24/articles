@@ -1,6 +1,6 @@
 ---
 title: 자주 사용하는 Git 명령어 정리
-# subtitle:
+description:
 date: 2020-03-08
 category: git
 tags: [git]

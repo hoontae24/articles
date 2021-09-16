@@ -1,6 +1,6 @@
 ---
-title: React 컴포넌트에 ref props 전달하기
-subtitle: (feat. forwardRef, useImperativeHandle)
+title: React 컴포넌트에 ref props 전달하기 (feat. forwardRef, useImperativeHandle)
+description:
 date: 2021-08-18
 category: react
 tags: [react, frontend]
