@@ -1,6 +1,6 @@
 ---
 title: 리액트에서 CSS-in-JS는 어떻게 동작할까?
-description: 자바스크립트를 이용하여 스타일을 적용할 수 있는 CSS-in-JS가 리액트에서 어떻게 동작하는지 알아보겠습니다.
+description: 자바스크립트를 이용하여 스타일을 적용할 수 있는 CSS-in-JS가 리액트에서 어떻게 동작하는지 알아보겠습니다. 또 CSS-in-JS를 구현한 라이브러리마다 어떤 차이가 있는지 비교해보겠습니다.
 date: 2021-09-26
 category: react
 tags: [react, css-in-js]
