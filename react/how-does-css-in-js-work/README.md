@@ -254,3 +254,5 @@ export default Task;
 CSS-in-JS의 여러 라이브러리를 직접 사용해보면서 어떤 방식으로 `css`를 적용하는 지 살펴보았습니다. 라이브러리들의 내부적인 상세한 구현은 모르지만 `cssom`을 조작하여 스타일을 적용한다는 것을 예제를 통해 확인할 수 있었습니다. 또한 흥미로웠던 것은 라이브러리마다 `cssom`을 조작하는 방식이 다르다는 것입니다. `CSSStyleRule`이 **생성**되는 방식과 **변경**되는 방식 중에서 상황에 따라 적합한 방식을 선택하는 것도 생각해볼 만한 구현 디테일인 것 같습니다.
 
 개인적으로 최근 [MUIv5](https://mui.com)가 발표되면서 `CSS-in-JS` 엔진에 대한 이야기([Migration from JSS to emotion](https://mui.com/blog/mui-core-v5/#migration-from-jss-to-emotion))를 인상 깊게 읽었었는데, 이번에 더 흥미가 생기게 된 것 같습니다.
+
+> 예제 코드는 [Github](https://github.com/hoontae24/blog-examples/tree/main/react/how-does-css-in-js-work)에서 확인할 수 있습니다.
