@@ -6,27 +6,35 @@ category: react
 tags: [react, css-in-js]
 ---
 
-![CSS-in-JS on REACT](./img/css-in-js-on-react.png)
+![css-in-js](./img/css-in-js.png)
 
-[팀 버너스리](https://namu.wiki/w/팀%20버너스리)가 고안한 [웹](https://namu.wiki/w/월드%20와이드%20웹?from=웹)이 등장한 이래로 많은 웹 서비스 기술들이 생기고 사라졌습니다. 하지만 여전히 [HTML](https://namu.wiki/w/HTML)은 우리에게 중요한 기술로 남아 있습니다. 또한 CSS 역시 웹 문서의 스타일을 꾸미기 위해 사용하는 강력한 기술입니다. 웹 개발자라면 HTML과 CSS로 이루어진 웹 문서에 대한 이해가 필수적일 것입니다. React, Vue 등 많은 프론트엔드 기술이 있지만 이것들 역시 더 효과적이고 매력적인 웹 문서(또는 웹 페이지)를 만들기 위한 도구일 뿐입니다.
+[팀 버너스리](https://namu.wiki/w/팀%20버너스리)가 고안한 [웹](https://namu.wiki/w/월드%20와이드%20웹?from=웹)이 등장한 이래로 많은 웹 기술들이 생기고 사라졌습니다. 하지만 여전히 [HTML](https://namu.wiki/w/HTML)은 우리에게 중요한 기술로 남아 있습니다. 또한 CSS 역시 웹 문서의 스타일을 꾸미기 위해 사용하는 강력한 기술입니다. 웹 개발자라면 HTML과 CSS로 이루어진 웹 문서에 대한 이해가 필수적일 것입니다. React, Vue 등 많은 프론트엔드 기술이 있지만 이것들 역시 더 효과적으로 웹 문서(또는 웹 페이지)를 만들기 위한 도구일 뿐이며 HTML, CSS를 대체할 수는 없습니다.
 
-저 역시 프론트엔드 개발에서 React를 주로 사용하지만 HTML과 CSS, Javascript를 이용한 가장 기본적인 부분을 알아야 할 필요를 느낄 때가 많습니다. React를 사용하더라도 CSS를 적용하는 방법은 다양합니다. 그 중 저는 [MUI](https://mui.com), [Styled-components](https://styled-components.com) 등의 라이브러리를 사용하면서 CSS-in-JS를 주로 다루었습니다. 자바스크립트를 통해 동적인 CSS를 생성할 수 있는 **CSS-in-JS**는 어떤 방식으로 CSS를 적용할까요?
-
-> 이번 예시 코드는 `React`에서 동작하는 `CSS-in-JS`를 살펴봅니다. 하지만 핵심 원리가 `React`에 의존하지는 않습니다.
+저 역시 프론트엔드 개발에서 React를 주로 사용하지만 HTML과 CSS, Javascript를 이용한 가장 기본적인 부분을 알아야 할 필요를 많이 느낍니다. React를 사용하더라도 CSS를 적용하는 방법은 다양합니다. 그 중 저는 [MUI](https://mui.com), [Styled-components](https://styled-components.com) 등의 라이브러리를 사용하면서 CSS-in-JS를 주로 다루었습니다. 자바스크립트를 통해 동적인 CSS를 생성할 수 있는 **CSS-in-JS**는 개발자 경험(DX)을 만족스럽게 하면서도 여전히 흥미로운 기술입니다.
 
 ## 1. CSS-in-JS
 
 > Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a document written in HTML or XML. ([MDN](https://developer.mozilla.org/en-US/docs/Web/CSS))
 
-CSS는 스타일 시트 언어입니다. 프로그래밍 언어가 아니기에 정적으로 동작합니다. 그래서 순수 CSS를 이용하여 복잡한 웹 페이지의 모든 스타일을 적용하고 관리하기란 꽤나 귀찮은 일이 아닐 수 없습니다. 그런 CSS를 보완하기 위해 여러 기술이 생겨났습니다. Sass, Less, Stylus 등의 CSS 전처리기 방식과 JSS, styled-components, emotion 등의 CSS-in-JS 방식 등이 있습니다.
+CSS는 스타일 시트 언어입니다. 순수 CSS만을 이용하여 웹 페이지의 모든 스타일을 적용하고 관리하기란 꽤나 귀찮은 일이 아닐 수 없습니다. 그런 CSS를 보완하기 위해 여러 기술이 생겨났습니다. Sass, Less, Stylus 등의 CSS 전처리기 방식과 JSS, styled-components, emotion 등의 CSS-in-JS 방식 등이 있습니다.
 
-CSS-in-JS 방식은 말 그대로 자바스크립트로 작성한 CSS입니다. JS를 통해 생성되기 때문에 runtime에서 시트가 생성, 관리되며 프로그래밍 언어의 동적 특징을 이용할 수 있습니다. 또한 몇몇 라이브러리는 Sass 등의 중첩 CSS 문법을 사용할 수도 있습니다.
+CSS-in-JS는 2014년 페이스북 개발자인 Christopher Chedeau aka Vjeux가 처음 [소개](http://blog.vjeux.com/2014/javascript/react-css-in-js-nationjs.html)하였습니다. Vjeux는 CSS를 작성하는 어려움을 다음과 같이 설명하였으며 CSS-in-JS로 이들 이슈를 모두 해결할 수 있다고 강조했습니다.
 
-???
-???
-???
+> - Global namespace: 글로벌 공간에 선언된 이름의 명명 규칙 필요
+> - Dependencies: CSS간의 의존 관계를 관리
+> - Dead Code Elimination: 미사용 코드 검출
+> - Minification: 클래스 이름의 최소화
+> - Sharing Constants: JS와 CSS의 상태 공유
+> - Non-deterministic Resolution: CSS 로드 우선 순위 이슈
+> - Isolation: CSS와 JS의 상속에 따른 격리 필요 이슈
+
+CSS-in-JS는 말 그대로 자바스크립트로 작성한 CSS입니다. JS를 통해 생성되기 때문에 runtime에서 시트가 생성, 관리되며 프로그래밍 언어의 동적 특징을 이용할 수 있습니다. 사실 시트가 렌더링되는 방식도 각 라이브러리마다 다릅니다. 여기서는 구체적인 렌더링 방식을 알아보기 보다는 간단한 예제를 통해 어떤 식으로 다루는 지 정도만 알아보겠습니다.
 
 ## 2. CSSOM, CSSStyleSheet
+
+![CSS-in-JS on REACT](./img/npmtrends.png)
+
+> 예제 코드는 `React`에서 동작하는 `CSS-in-JS`를 살펴봅니다. 하지만 핵심 원리가 `React`에 의존하지는 않습니다.
 
 인기 있는 CSS-in-JS 라이브러리 중 `react-jss`, `styled-components`, `@emotion/css`을 이용해 코드를 작성해보고 CSS가 어떻게 생성되는 지 직접 알아보겠습니다. 저는 `CRA`를 이용하여 리액트 환경을 구성하고 간단한 Task 관리 앱을 만들었습니다. 화면 결과는 따로 보여드리지 않고 생성된 `html` 태그와 `CSSOM` 객체에 정의된 스타일 시트를 확인하여 CSS가 어떻게 적용되는지 확인해보겠습니다.
 
@@ -251,8 +259,15 @@ export default Task;
 
 ## 마무리
 
-CSS-in-JS의 여러 라이브러리를 직접 사용해보면서 어떤 방식으로 `css`를 적용하는 지 살펴보았습니다. 라이브러리들의 내부적인 상세한 구현은 모르지만 `cssom`을 조작하여 스타일을 적용한다는 것을 예제를 통해 확인할 수 있었습니다. 또한 흥미로웠던 것은 라이브러리마다 `cssom`을 조작하는 방식이 다르다는 것입니다. `CSSStyleRule`이 **생성**되는 방식과 **변경**되는 방식 중에서 상황에 따라 적합한 방식을 선택하는 것도 생각해볼 만한 구현 디테일인 것 같습니다.
+CSS-in-JS의 여러 라이브러리를 직접 사용해보면서 어떤 방식으로 `css`를 적용하는 지 살펴보았습니다. 라이브러리들의 내부적인 상세한 구현은 모르지만 `cssom`을 조작하여 스타일을 적용한다는 것을 예제를 통해 확인할 수 있었습니다. 또한 흥미로웠던 것은 라이브러리마다 `cssom`을 조작하는 방식이 다르다는 것입니다. `CSSStyleRule`을 **생성**하는 방식과 **변경**하는 방식 중에서 상황에 따라 적합한 방식을 선택하는 것도 생각해볼 만한 구현 디테일인 것 같습니다.
 
 개인적으로 최근 [MUIv5](https://mui.com)가 발표되면서 `CSS-in-JS` 엔진에 대한 이야기([Migration from JSS to emotion](https://mui.com/blog/mui-core-v5/#migration-from-jss-to-emotion))를 인상 깊게 읽었었는데, 이번에 더 흥미가 생기게 된 것 같습니다.
 
 > 예제 코드는 [Github](https://github.com/hoontae24/blog-examples/tree/main/react/how-does-css-in-js-work)에서 확인할 수 있습니다.
+
+> 이 글을 작성하면서 아래의 글에 도움을 받았습니다.
+>
+> - [웹 컴포넌트 스타일링 관리: CSS-in-JS vs CSS-in-CSS](https://www.samsungsds.com/kr/insights/web_component.html)
+> - [CSS-in-JS, 무엇이 다른가요?](https://so-so.dev/web/css-in-js-whats-the-defference/)
+> - [[번역] CSS-in-JS에 관해 알아야 할 모든 것](https://d0gf00t.tistory.com/22)
+> - [What actually is CSS-in-JS?](https://medium.com/dailyjs/what-is-actually-css-in-js-f2f529a2757)
