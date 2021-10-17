@@ -1,7 +1,7 @@
 ---
 title: "MUI v5, DX 개선을 위한 고민들"
 description:
-date: 2021-10-15
+date: 2021-10-17
 category: react
 tags: [react, frontend, mui]
 ---
@@ -63,3 +63,5 @@ MUI 팀은 여러 옵션을 조사한 후, 위의 이슈를 해결하는 가장 
 3. MUI 팀은 emotion에 지난 몇 달 동안 월 $100을 후원했습니다. 이것을 지금은 $1000으로 인상했습니다. emotion 라이브러리가 기술적 수준을 이끌어가면서 한계를 초월하도록 돕는 것이 가장 큰 관심사이기 때문입니다.
 
 emotion으로 변경에 대한 첫 번째 즉각적인 이점은 **성능**입니다. `<Box>` 컴포넌트는 v4와 비교했을 때 v5에서 [5배~10배](https://codesandbox.io/s/zlh5w?file=/src/App.js) 정도 성능이 좋습니다.
+
+### 2.2. `sx` 속성
