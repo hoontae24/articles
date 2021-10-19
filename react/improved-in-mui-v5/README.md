@@ -92,3 +92,87 @@ v5에서 새롭게 추가된 `sx` 속성은 기존 `MUI System`을 한 단계 �
 > `sx` prop과 함께 개선된 MUI System에 대한 내용은 [이 포스트](https://mui.com/system/basics/#why-use-the-system)에서 자세히 보실 수 있습니다.
 
 ### 2.3. 동적 속성(Dynamic props)
+
+리액트 컴포넌트는 조합으로 사용합니다. 개발자가 코어 컴포넌트를 확장하는 방법은 컴포넌트를 임포트하고, 확장하고, 래핑한 컴포넌트를 다시 익스포트하는 식으로 작성합니다. `label`과 `input`의 조합으로 이루어져 있는 `<TextField>` 컴포넌트가 대표적인 조합 예시라고 할 수 있습니다. v4까지 이런 방법으로 컴포넌트를 작성했지만 다음과 같은 문제가 있습니다.
+
+1. 새 컴포넌트를 만들 때마다, 이것은 팀에게 추가되는 새로운 임포트 옵션입니다. 제대로 컴포넌트를 임포트 했는지 확인해야 합니다.
+
+2. 새로운 `color="success"` 속성을 Button 컴포넌트에 추가하려면 사소하지 않은 CSS 커스텀이 필요합니다.
+
+3. 보일러플레이트가 추가됩니다.
+
+이러한 문제를 위해, v5에서는 컴포넌트의 고유한 동작을 확장하기 위한 기능이 제공됩니다. 이것은 Github에서 많은 투표를 받은 이슈 중 하나입니다([#13875](https://github.com/mui-org/material-ui/issues/13875)). 실제로 이 변경은 MUI Core 컴포넌트를 확장 가능한 플레이스홀더로 만듭니다.
+
+이 기능의 첫번째로, 컴포넌트의 기존 스타일 매핑을 사용할 수 있습니다. 예를 들어, 새로운 `neutral` 색상을 컬러 팔레트에 추가하고, 버튼 컴포넌트는 그에 맞는 파생된 색상들을 계산합니다.
+
+```tsx
+import { createTheme, Button } from "@mui/material";
+
+// 1. theme 객체 확장
+const theme = createTheme({
+  palette: {
+    neutral: {
+      main: "#d79b4a",
+    },
+  },
+});
+
+// 2. 팔레트에 새로운 색상에 대한 타입 정의
+declare module "@mui/material/styles" {
+  interface Palette {
+    neutral: Palette["primary"];
+  }
+  interface PaletteOptions {
+    neutral: PaletteOptions["primary"];
+  }
+}
+
+// 3. Button 컴포넌트에 props로서 추가
+declare module "@mui/material/Button" {
+  interface ButtonPropsColorOverrides {
+    neutral: true;
+  }
+}
+
+// 4. 사용 이점
+<Button color="neutral" />;
+```
+
+두번째로, theme 객체에 특정 `prop` 조합에 대한 CSS를 오버라이딩하는 커스텀 variant를 추가할 수 있습니다. 아래 코드에서는 variants로 `dashed`가 추가되었고, `dashed`와 `color="error"`의 조합에 대한 CSS를 커스텀으로 정의합니다.
+
+```tsx
+import { createTheme, Button } from "@mui/material";
+
+// 1. theme 객체 확장
+const theme = createTheme({
+  components: {
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: "dashed", color: "error" },
+          style: {
+            border: "1px dashed red",
+            color: "red",
+          },
+        },
+      ],
+    },
+  },
+});
+
+// 2. Button 컴포넌트에 props로서 추가
+declare module "@mui/material/Button" {
+  interface ButtonPropsVariantOverrides {
+    dashed: true;
+  }
+}
+
+// 3. 사용 이점
+<Button variant="dashed" color="error">
+  dashed
+</Button>;
+```
+
+v4에서도 `theme` 객체를 확장하여 커스텀 색상이나 Mixins 등을 추가할 수 있었습니다. 하지만 MUI Core의 기본 컴포넌트에는 적용할 수 없었습니다. theme 객체에 추가 선언하는 것만으로도 컴포넌트 props로 자동 적용되는 것은 정말 MUI 사용자로서 반가운 업데이트입니다.
+
+### 2.4. 글로벌 class 이름
