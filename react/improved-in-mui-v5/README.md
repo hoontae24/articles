@@ -175,4 +175,45 @@ declare module "@mui/material/Button" {
 
 v4에서도 `theme` 객체를 확장하여 커스텀 색상이나 Mixins 등을 추가할 수 있었습니다. 하지만 MUI Core의 기본 컴포넌트에는 적용할 수 없었습니다. theme 객체에 추가 선언하는 것만으로도 컴포넌트 props로 자동 적용되는 것은 정말 MUI 사용자로서 반가운 업데이트입니다.
 
-### 2.4. 글로벌 class 이름
+### 2.4. Global class names
+
+v4에서 MUI Core 컴포넌트는 글로벌 클래스([Button](https://v4.mui.com/api/button/#css))를 가지고 있습니다. 또 사용자가 생성하는 스타일에도 원하는 규칙에 따라 실제 CSS 클래스를 커스텀할 수 있습니다. v3에서부터 `classes` API를 바르게 사용하는 것에 대한 불만이 있었습니다. 저 역시도 `.MuiButton-root`와 같은 클래스명을 직접 접근해서 사용하는 것이 `하드코딩`처럼 느껴져서 지양하는 방식이었습니다.
+
+v5에서는 호스트의 DOM 노드에 항상 글로벌 클래스를 추가하여 이 방법을 확장했습니다. 글로벌 클래스는 복잡한 컴포넌트의 커스텀을 단순하게 할 수 있도록, 자식 컴포넌트의 커스텀을 가능하게 합니다.
+
+예제를 통해 input의 바깥쪽 border 색상을 지정하는 세 가지 방법을 비교해보세요.
+
+```tsx
+import TextField from '@mui/material/TextField';
+import { outlinedInputClasses } from '@mui/material/OutlinedInput';
+import { styled } from '@mui/material/styles';
+
+// Option 1: 글로벌 클래스(string)
+const CustomizedTextField1 = styled(TextField)({
+  '& .MuiOutlinedInput-notchedOutline': {
+    borderColor: 'red',
+  },
+});
+
+// Option 2: 글로벌 클래스(constant variables)
+const CustomizedTextField2 = styled(TextField)({
+  [`& .${outlinedInputClasses.notchedOutline}`]: {
+    borderColor: 'red',
+  },
+});
+
+// Option 3: classes 속성 (예전 방식)
+const CustomizedTextField3 = styled((props) => (
+  <TextField
+    {...props}
+    variant="outlined"
+    InputProps={{ classes: { notchedOutline: 'foo' } }}
+  />
+))({
+  '& .foo': {
+    borderColor: 'red',
+  },
+}) as typeof TextField;
+```
+
+### 2.5. Unstyled components (alpha)
