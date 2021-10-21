@@ -12,13 +12,13 @@ tags: [react, frontend, mui]
 > \
 > 이 글은 **원문**의 개선점에 대한 내용의 일부를 리뷰한 글이며, 오역이 있을 수도 있습니다.
 
-[MUIv5](https://mui.com)가 릴리즈([2020-09-16](https://github.com/mui-org/material-ui/releases/tag/v5.0.0)) 되었습니다. MUI는 구글의 디자인 철학인 [Material Design](https://material.io)을 구현한 자바스크립트 라이브러리이고, [리액트 UI 라이브러리](https://www.npmtrends.com/@material-ui/core-vs-antd-vs-react-bootstrap-vs-reactstrap-vs-semantic-ui-react) 중에서 가장 점유율이 높은 패키지입니다. 여전히 활발하게 업데이트가 진행 중인 MUI팀의 고민들을 살펴보면서 그들이 프로덕트 품질 향상과 팀 성장을 이루어가는 경험을 살펴보겠습니다.
+[MUIv5](https://mui.com)가 릴리즈([2020.09.16](https://github.com/mui-org/material-ui/releases/tag/v5.0.0)) 되었습니다. MUI는 구글의 디자인 철학인 [Material Design](https://material.io)을 구현한 자바스크립트 라이브러리이고, [리액트 UI 라이브러리](https://www.npmtrends.com/@material-ui/core-vs-antd-vs-react-bootstrap-vs-reactstrap-vs-semantic-ui-react) 중에서 가장 점유율이 높은 패키지입니다. 여전히 활발하게 업데이트가 진행 중인 MUI팀의 고민들을 살펴보면서 그들이 프로덕트 품질 향상과 팀 성장을 이루어가는 경험을 살펴보겠습니다.
 
 ## 1. 브랜딩 관점에서 본 MUI
 
 > We hope you are going to enjoy the DX improvement of only having to type 3 letters to type to find us on the internet: mui.com and to import us from npm @mui!
 
-이전에는 **Material-UI**였으나 이제 단 **3글자**로 줄였습니다. **개발자 경험**(**DX**)의 개선을 위해서라고 하는데, 얼마나 DX에 관심이 많은지 알 수 있는 부분입니다. 이번 업데이트에서 패키지 이름이 변경되는 것은 단순히 다른 이름을 `import`하는 [Breaking Changes](https://stackoverflow.com/questions/21703216/what-is-a-breaking-change-in-software)이면서도 브랜딩 관점에서 네이밍을 명확히 하는 변경입니다.
+이전에는 **Material-UI**였으나 이제 단 **3글자**로 줄였습니다. 이는 **개발자 경험**(**DX**)의 개선을 위해서라고 하는데, 얼마나 DX에 관심이 많은지 알 수 있는 부분입니다. 이번 업데이트에서 패키지 이름이 변경되는 것은 단순히 다른 이름을 `import`하는 [Breaking Changes](https://stackoverflow.com/questions/21703216/what-is-a-breaking-change-in-software)이면서도 브랜딩 관점에서 네이밍을 명확히 하는 변경입니다.
 
 1. Material-UI 조직을 `MUI`라 칭함.
 2. Material-UI MIT 컴포넌트 셋을 `MUI Core`라 칭함.
@@ -292,4 +292,4 @@ MUI Core의 코드 베이스는 아직 완전히 Typescript로 작성되지 않�
 
 사실 이 포스트를 작성하는 시점에도 v5를 실제로 사용해보지는 않았습니다. 진행하는 프로젝트에서 바로 적용하기에는 Breaking Changes가 너무 많고 마이그레이션도 부담스럽기 때문입니다. 또 emotion을 이용한 스타일링 방식에 아직 익숙지 않아서 약간의 러닝커브가 생겨서 약간의 시간이 필요할 것 같습니다.
 
-실습 없이 v5를 분석한 것이 부족한 정보일지도 모르겠습니다. 하지만 이 포스트를 통하여 v5로의 변경에서 MUI팀이 어떤 가치를 추구하는지 살펴보고, UI 라이브러리와 CSS 스타일링에 대한 이해가 넓어지는 데에 도움이 되었기를 바랍니다. 더 자세하고 올바른 정보를 얻기를 원하신다면 [원문](https://mui.com/blog/mui-core-v5/)을 참고하시기 바랍니다.
+실습 없이 v5를 분석한 것이 부족한 정보일지도 모르겠습니다. 하지만 이 포스트를 통하여 v5로의 변경에서 MUI팀이 어떤 가치 경험을 추구하는지 살펴보고, UI 라이브러리와 CSS 스타일링에 대한 이해가 넓어지는 데에 도움이 되었기를 바랍니다. 더 자세하고 올바른 정보를 얻기를 원하신다면 [원문](https://mui.com/blog/mui-core-v5/)을 참고하시기 바랍니다.
