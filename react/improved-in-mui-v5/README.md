@@ -184,21 +184,21 @@ v5에서는 호스트의 DOM 노드에 항상 글로벌 클래스를 추가하�
 예제를 통해 input의 바깥쪽 border 색상을 지정하는 세 가지 방법을 비교해보세요.
 
 ```tsx
-import TextField from '@mui/material/TextField';
-import { outlinedInputClasses } from '@mui/material/OutlinedInput';
-import { styled } from '@mui/material/styles';
+import TextField from "@mui/material/TextField";
+import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { styled } from "@mui/material/styles";
 
 // Option 1: 글로벌 클래스(string)
 const CustomizedTextField1 = styled(TextField)({
-  '& .MuiOutlinedInput-notchedOutline': {
-    borderColor: 'red',
+  "& .MuiOutlinedInput-notchedOutline": {
+    borderColor: "red",
   },
 });
 
 // Option 2: 글로벌 클래스(constant variables)
 const CustomizedTextField2 = styled(TextField)({
   [`& .${outlinedInputClasses.notchedOutline}`]: {
-    borderColor: 'red',
+    borderColor: "red",
   },
 });
 
@@ -207,13 +207,47 @@ const CustomizedTextField3 = styled((props) => (
   <TextField
     {...props}
     variant="outlined"
-    InputProps={{ classes: { notchedOutline: 'foo' } }}
+    InputProps={{ classes: { notchedOutline: "foo" } }}
   />
 ))({
-  '& .foo': {
-    borderColor: 'red',
+  "& .foo": {
+    borderColor: "red",
   },
 }) as typeof TextField;
 ```
 
 ### 2.5. Unstyled components (alpha)
+
+개발자가 MUI를 선택하는 주된 이유는 더 빠르게 UI를 만들 수 있기 때문입니다. 많은 컴포넌트가 이미 충분히 완성되어 있고, 쉽게 커스텀할 수 있게 스타일링 시스템이 적용되어 있습니다. MUI에 의존하면서 개발자는 **tradeoff**를 만듭니다. Material Design 컴포넌트 위에 새로운 스타일을 적용하는 것이 새 컴포넌트를 처음부터 만들거나 다른 라이브러리를 선택하는 것보다 빠를 것이라고 판단합니다. 또한 충분한 성능을 발휘하고 자유도를 잃지 않을 것이라고 생각합니다.
+
+이 **tradeoff**는 제한된 작은 팀이나 내부적인 툴을 만드는 큰 팀에서 잘 동작합니다. 하지만 대규모의 프로젝트를 진행하는 팀은 어떨까요? 그들은 자유도도 높고 Material Design이 포함되지 않은, 그렇지만 처음부터 만드는 것 보다는 더 나은 옵션이 있어야 합니다.
+
+이 문제에 대하여 Material Design 컴포넌트를 **hooks**와 **Unstyled components**로 분리하는 작업을 시작했습니다. 아직 alpha 단계이지만, 첫번째 빌딩 블럭을 new unstyled 패키지에서 찾아볼 수 있습니다.
+
+```tsx
+const CustomButton = React.forwardRef(function CustomButton(
+  props: ButtonUnstyledProps,
+  ref: React.ForwardedRef<any>
+) {
+  const { children } = props;
+  const { active, disabled, focusVisible, getRootProps } = useButton({
+    ...props,
+    ref,
+    component: CustomButtonRoot,
+  });
+
+  const classes = {
+    active,
+    disabled,
+    focusVisible,
+  };
+
+  return (
+    <CustomButtonRoot {...getRootProps()} className={clsx(classes)}>
+      {children}
+    </CustomButtonRoot>
+  );
+});
+```
+
+이러한 문제와 해결 방식을 보면서, 이미 오래전부터 사용해오며 코드가 굳어진 컴포넌트의 스타일과 로직을 분리하는 것으로 더 세분화된 **관심사의 분리([SOC](https://ko.wikipedia.org/wiki/관심사_분리))**가 이루어졌습니다. 이 코드 분리 예시는 리액트 개발자로서 좋은 컴포넌트 작성을 위한 팁이 되는 것 같습니다.
