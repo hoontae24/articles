@@ -283,3 +283,7 @@ MUI Core의 코드베이스는 아직 완전히 Typescript로 작성되지 않�
 - 대부분의 새로운 코드를 Typescript로 작성하고 있습니다.
 
 ### 3.5. Strict Mode 지원
+
+이번 릴리즈에서 `StrictMode`에 대한 호환성을 지원한다. 이제 테스트의 실행과 문서화가 strict mode에서 실행된다. 이전 버전에서는 대표적인 예시로, `Tooltip`이나 `Modal`과 같이 내부적으로 `findDomNode`를 사용하는 컴포넌트가 있다면 strict mode에서 에러를 발생시켰다.
+
+하지만 레거시 방식을 사용하는 `@mui/styles` 패키지는 아직 strict mode와 동시성 기능이 호환되지 않는다.
