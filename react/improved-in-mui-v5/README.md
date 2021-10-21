@@ -1,7 +1,7 @@
 ---
-title: "MUI v5, DX 개선을 위한 고민들"
+title: "MUI v5, 무엇이 바뀌었을까? (feat. why)"
 description:
-date: 2021-10-17
+date: 2021-10-22
 category: react
 tags: [react, frontend, mui]
 ---
