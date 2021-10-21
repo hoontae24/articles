@@ -278,12 +278,18 @@ const CustomButton = React.forwardRef(function CustomButton(
 
 MUI Core의 코드베이스는 아직 완전히 Typescript로 작성되지 않았지만, 먼 길을 왔습니다. v4에서는 모든 데모를 Typescript로 먼저 작성했습니다. v5에서는 Typescript의 적용을 향한 새로운 단계를 만들었습니다.
 
-- API pages의 소스로 Typescript 정의를 만들었다. 이것은 새 릴리즈에 오래된 정의를 포함하는 가능성을 줄여줍니다.
+- API pages의 소스로 Typescript 정의를 만들었습니다. 이것은 새 릴리즈에 오래된 정의를 포함하는 가능성을 줄여줍니다.
 - Typescript로 작성될 첫 번째 컴포넌트를 마이그레이션했습니다.
 - 대부분의 새로운 코드를 Typescript로 작성하고 있습니다.
 
 ### 3.5. Strict Mode 지원
 
-이번 릴리즈에서 `StrictMode`에 대한 호환성을 지원한다. 이제 테스트의 실행과 문서화가 strict mode에서 실행된다. 이전 버전에서는 대표적인 예시로, `Tooltip`이나 `Modal`과 같이 내부적으로 `findDomNode`를 사용하는 컴포넌트가 있다면 strict mode에서 에러를 발생시켰다.
+이번 릴리즈에서 `StrictMode`에 대한 호환성을 지원합니다. 이제 테스트의 실행과 문서화가 strict mode에서 실행됩니다. 이전 버전에서는 대표적인 예시로, `Tooltip`이나 `Modal`과 같이 내부적으로 `findDomNode`를 사용하는 컴포넌트가 있다면 strict mode에서 에러를 발견할 수 있습니다..
 
-하지만 레거시 방식을 사용하는 `@mui/styles` 패키지는 아직 strict mode와 동시성 기능이 호환되지 않는다.
+하지만 레거시 방식을 사용하는 `@mui/styles` 패키지는 아직 strict mode와 동시성 기능이 호환되지 않습니다.
+
+## 마치며
+
+사실 이 포스트를 작성하는 시점에도 v5를 실제로 사용해보지는 않았습니다. 진행하는 프로젝트에서 바로 적용하기에는 Breaking Changes가 너무 많고 마이그레이션도 부담스럽기 때문입니다. 또 emotion을 이용한 스타일링 방식에 아직 익숙치 않아서 약간의 러닝커브가 생겨서 약간의 시간이 필요할 것 같습니다.
+
+실습 없이 v5를 분석한 것이 부족한 정보일지도 모르겠습니다. 하지만 이 포스트를 통하여 v5로의 변경에서 MUI팀이 어떤 가치를 추구하는 지 살펴보고, UI 라이브러리와 CSS 스타일링에 대한 이해가 넓어지는 데에 도움이 되었기를 바랍니다.
