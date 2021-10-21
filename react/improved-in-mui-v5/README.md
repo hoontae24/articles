@@ -177,7 +177,7 @@ v4에서도 `theme` 객체를 확장하여 커스텀 색상이나 Mixins 등을 
 
 ### 2.4. Global class names
 
-v4에서 MUI Core 컴포넌트는 글로벌 클래스([Button](https://v4.mui.com/api/button/#css))를 가지고 있습니다. 또 사용자가 생성하는 스타일에도 원하는 규칙에 따라 실제 CSS 클래스를 커스텀할 수 있습니다. v3에서부터 `classes` API를 바르게 사용하는 것에 대한 불만이 있었습니다. 저 역시도 `.MuiButton-root`와 같은 클래스명을 직접 접근해서 사용하는 것이 `하드코딩`처럼 느껴져서 지양하는 방식이었습니다.
+v4에서 MUI Core 컴포넌트는 글로벌 클래스([Button](https://v4.mui.com/api/button/#css))를 가지고 있습니다. 또 사용자가 생성하는 스타일에도 원하는 규칙에 따라 실제 CSS 클래스를 커스텀할 수 있습니다. v3에서부터 `classes` API를 바르게 사용하는 것에 대한 불만이 있었습니다. 저 역시도 `.MuiButton-root`와 같은 클래스를 직접 접근해서 사용하는 것이 `하드코딩`처럼 느껴져서 지양하는 방식이었습니다.
 
 v5에서는 호스트의 DOM 노드에 항상 글로벌 클래스를 추가하여 이 방법을 확장했습니다. 글로벌 클래스는 복잡한 컴포넌트의 커스텀을 단순하게 할 수 있도록, 자식 컴포넌트의 커스텀을 가능하게 합니다.
 
@@ -220,9 +220,9 @@ const CustomizedTextField3 = styled((props) => (
 
 개발자가 MUI를 선택하는 주된 이유는 더 빠르게 UI를 만들 수 있기 때문입니다. 많은 컴포넌트가 이미 충분히 완성되어 있고, 쉽게 커스텀할 수 있게 스타일링 시스템이 적용되어 있습니다. 개발자에게는 MUI에 의존하면서 생기는 **tradeoff**가 있습니다. 그들은 **Material Design 컴포넌트 위에 새로운 스타일을 적용하는 것**이 **새 컴포넌트를 처음부터 만들**거나 **다른 라이브러리를 선택하는 것**보다 빠를 것이라고 판단합니다. 또한 충분한 성능을 발휘하고 자유도를 잃지 않을 것이라고 생각합니다.
 
-이 **tradeoff**는 제한된 작은 팀이나 내부적인 툴을 만드는 큰 팀에서는 효과적입니다. 하지만 대규모의 프로젝트를 진행하는 팀은 자유도도 높고 Material Design이 포함되지 않은, 그렇지만 처음부터 만드는 것 보다는 더 나은 옵션이 있어야 합니다.
+이 **tradeoff**는 제한된 작은 팀이나 내부적인 툴을 만드는 큰 팀에서는 효과적입니다. 하지만 대규모의 프로젝트를 진행하는 팀은 자유도도 높고 Material Design이 포함되지 않은, 그렇지만 처음부터 만드는 것보다는 더 나은 옵션이 있어야 합니다.
 
-이 문제에 대하여 Material Design 컴포넌트를 **hooks**와 **Unstyled components**로 분리하는 작업을 시작했습니다. 아직 alpha 단계이지만, 첫번째 빌딩 블럭을 new unstyled 패키지에서 찾아볼 수 있습니다.
+이 문제에 대하여 Material Design 컴포넌트를 **hooks**와 **Unstyled components**로 분리하는 작업을 시작했습니다. 아직 alpha 단계이지만, 첫 번째 빌딩 블럭을 new unstyled 패키지에서 찾아볼 수 있습니다.
 
 ```tsx
 const CustomButton = React.forwardRef(function CustomButton(
@@ -250,15 +250,15 @@ const CustomButton = React.forwardRef(function CustomButton(
 });
 ```
 
-이러한 문제와 해결 방식을 통해, 이미 오래전부터 사용해오며 코드가 굳어진 컴포넌트의 스타일과 로직을 분리하는 것으로 더 세분화된 **관심사의 분리([SOC](https://ko.wikipedia.org/wiki/관심사_분리))**가 이루어졌습니다. 이 코드 분리 예시는 리액트 개발자로서도 좋은 컴포넌트 작성을 위한 팁이 되는 것 같습니다.
+이러한 문제와 해결 방식을 통해, 이미 오래전부터 사용해오며 코드가 굳어진 컴포넌트의 스타일과 로직을 분리하는 것으로 더 세분화된 **관심사의 분리**([SOC](https://ko.wikipedia.org/wiki/관심사_분리))가 이루어졌습니다. 이 코드 분리 예시는 리액트 개발자로서도 좋은 컴포넌트 작성을 위한 팁이 되는 것 같습니다.
 
 ## 3. Improved DX
 
 ### 3.1. 더 작아진 데모
 
-대부분의 데모는 처음에 컴포넌트를 유지보수하는 작업에 도움이 되도록 고려하여 추가되었습니다. 이제 그 대신, 우선 순위를 반대로하여 개발자들이 사용하는 것을 우선했습니다. ([Inline previews](https://github.com/mui-org/material-ui/issues/22484))
+대부분의 데모는 처음에 컴포넌트를 유지보수하는 작업에 도움이 되도록 고려하여 추가되었습니다. 이제 그 대신, 우선순위를 반대로 하여 개발자들이 사용하는 것을 우선했습니다. ([Inline previews](https://github.com/mui-org/material-ui/issues/22484))
 
-사실 이것은 복잡한 데모를 더 작게 쪼개는 것을 의미하고, 가능한 많은 "Inline previews" 가지는 것을 목표로 합니다. 이것은 데모를 확장하고 코드의 어떤 부분이 화면에서 내가 관심있는 부분인지 찾는 오버헤드를 줄여줍니다.
+사실 이것은 복잡한 데모를 더 작게 쪼개는 것을 의미하고, 가능한 많은 "Inline previews" 가지는 것을 목표로 합니다. 이것은 데모를 확장하고 코드의 어떤 부분이 화면에서 내가 관심 있는 부분인지 찾는 오버헤드를 줄여줍니다.
 
 ![inline-preview](./img/inline-preview.png)
 
@@ -270,13 +270,13 @@ const CustomButton = React.forwardRef(function CustomButton(
 
 ### 3.3. Enzyme에서 Testing Library로
 
-**class components**에서 **hooks**로의 마이그레이션([v4 is out](https://medium.com/material-ui/material-ui-v4-is-out-4b7587d1e701))에서 [Enzyme](https://github.com/enzymejs/enzyme/)으로 작성된 많은 테스트가 깨졌습니다. 테스트가 너무 React 내부와 결합되어 있었습니다. 그래서 [Testing Library](https://testing-library.com/)로 전환하기로 결정했습니다.
+**class components**에서 **hooks**로의 마이그레이션([v4 is out](https://medium.com/material-ui/material-ui-v4-is-out-4b7587d1e701))에서 [Enzyme](https://github.com/enzymejs/enzyme/)으로 작성된 많은 테스트가 깨졌습니다. 테스트가 너무 React 내부와 결합되어 있었습니다. 그래서 [Testing Library](https://testing-library.com/)로의 전환을 결정했습니다.
 
-새로운 테스트를 작성할 때, MUI팀의 테스트 코드가 영감이 될 수 있을 것입니다. 마이그레이션을 통해 구현의 일부를 다시 생각해보고, 라이브러리와 함께 더 쉽게 테스트할 수 있게 되었습니다.
+새로운 테스트를 작성할 때, MUI팀의 테스트 코드가 영감이 될 수 있을 것입니다. 마이그레이션을 통해 구현 일부를 다시 생각해보고, 라이브러리와 함께 더 쉽게 테스트할 수 있게 되었습니다.
 
 ### 3.4. Typescript migration
 
-MUI Core의 코드베이스는 아직 완전히 Typescript로 작성되지 않았지만, 먼 길을 왔습니다. v4에서는 모든 데모를 Typescript로 먼저 작성했습니다. v5에서는 Typescript의 적용을 향한 새로운 단계를 만들었습니다.
+MUI Core의 코드 베이스는 아직 완전히 Typescript로 작성되지 않았지만, 먼 길을 왔습니다. v4에서는 모든 데모를 Typescript로 먼저 작성했습니다. v5에서는 Typescript의 적용을 향한 새로운 단계를 만들었습니다.
 
 - Typescript 명세를 이용해 API pages의 원본을 만들었습니다. 이것은 새 릴리즈에 오래된 정의를 포함하는 가능성을 줄여줍니다.
 - Typescript로 작성될 첫 번째 컴포넌트를 마이그레이션했습니다.
@@ -290,6 +290,6 @@ MUI Core의 코드베이스는 아직 완전히 Typescript로 작성되지 않�
 
 ## 마치며
 
-사실 이 포스트를 작성하는 시점에도 v5를 실제로 사용해보지는 않았습니다. 진행하는 프로젝트에서 바로 적용하기에는 Breaking Changes가 너무 많고 마이그레이션도 부담스럽기 때문입니다. 또 emotion을 이용한 스타일링 방식에 아직 익숙치 않아서 약간의 러닝커브가 생겨서 약간의 시간이 필요할 것 같습니다.
+사실 이 포스트를 작성하는 시점에도 v5를 실제로 사용해보지는 않았습니다. 진행하는 프로젝트에서 바로 적용하기에는 Breaking Changes가 너무 많고 마이그레이션도 부담스럽기 때문입니다. 또 emotion을 이용한 스타일링 방식에 아직 익숙지 않아서 약간의 러닝커브가 생겨서 약간의 시간이 필요할 것 같습니다.
 
-실습 없이 v5를 분석한 것이 부족한 정보일지도 모르겠습니다. 하지만 이 포스트를 통하여 v5로의 변경에서 MUI팀이 어떤 가치를 추구하는 지 살펴보고, UI 라이브러리와 CSS 스타일링에 대한 이해가 넓어지는 데에 도움이 되었기를 바랍니다. 더 자세하고 올바른 정보를 얻기 원하신다면 [원문](https://mui.com/blog/mui-core-v5/)을 참고하시기 바랍니다.
+실습 없이 v5를 분석한 것이 부족한 정보일지도 모르겠습니다. 하지만 이 포스트를 통하여 v5로의 변경에서 MUI팀이 어떤 가치를 추구하는지 살펴보고, UI 라이브러리와 CSS 스타일링에 대한 이해가 넓어지는 데에 도움이 되었기를 바랍니다. 더 자세하고 올바른 정보를 얻기를 원하신다면 [원문](https://mui.com/blog/mui-core-v5/)을 참고하시기 바랍니다.
