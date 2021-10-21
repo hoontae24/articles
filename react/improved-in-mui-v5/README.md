@@ -251,3 +251,35 @@ const CustomButton = React.forwardRef(function CustomButton(
 ```
 
 이러한 문제와 해결 방식을 보면서, 이미 오래전부터 사용해오며 코드가 굳어진 컴포넌트의 스타일과 로직을 분리하는 것으로 더 세분화된 **관심사의 분리([SOC](https://ko.wikipedia.org/wiki/관심사_분리))**가 이루어졌습니다. 이 코드 분리 예시는 리액트 개발자로서 좋은 컴포넌트 작성을 위한 팁이 되는 것 같습니다.
+
+## 3. Improved DX
+
+이 챕터는 MUI를 사용하는 개발자들의 DX를 개선하는 부분이지만 제품에 대한 고민이라기 보단, 제품을 사용하는 편의에 대한 부분이기에 간단히 다루겠습니다. _(MUI를 사용하는 개발자의 UX라고 표현하는 게 더 적합한 것 같네요.)_
+
+### 3.1. 더 작아진 데모
+
+원래 많은 데모는 컴포넌트에서 유지보수하는 작업을 고려하여 추가되었습니다. 대신, 우선 순위를 반대로하여 개발자들이 사용하는 것을 우선했습니다. ([Inline previews](https://github.com/mui-org/material-ui/issues/22484))
+
+사실 이것은 복잡한 데모를 더 작게 쪼개는 것을 의미하고, 가능한 많은 "Inline previews" 가지는 것을 목표로 합니다. 이것은 데모를 확장하고 코드의 어떤 부분이 화면에서 내가 관심있는 부분인지 찾는 오버헤드를 줄여줍니다.
+
+![inline-preview](./img/inline-preview.png)
+
+### 3.2. IntelliSense에서의 Props 명세
+
+![inline-preview](./img/prop-descriptions.png)
+
+모든 Props 명세가 Typescript로 작성되었고, 에디터의 IntelliSense에서 더 많은 컨텍스트를 볼 수 있습니다. 또한 [API pages](https://mui.com/api/autocomplete/#props)도 역시 Typescript Props 명세로 작성되었습니다. 문서가 하나의 원본 소스로 이루어져 있습니다.
+
+### 3.3. Enzyme에서 Testing Library로
+
+**class components**에서 **hooks**로의 마이그레이션에서 [Enzyme](https://github.com/enzymejs/enzyme/)으로 작성된 많은 테스트가 깨졌습니다. 테스트가 너무 React 내부와 결합되어 있었습니다. 그래서 [Testing Library](https://testing-library.com/)로 전환하기로 결정했습니다.
+
+### 3.4. Typescript migration
+
+MUI Core의 코드베이스는 아직 완전히 Typescript로 작성되지 않았지만, 먼 길을 왔습니다. v4에서는 모든 데모를 Typescript로 먼저 작성했습니다. v5에서는 Typescript의 적용을 향한 새로운 단계를 만들었습니다.
+
+- API pages의 소스로 Typescript 정의를 만들었다. 이것은 새 릴리즈에 오래된 정의를 포함하는 가능성을 줄여줍니다.
+- Typescript로 작성될 첫 번째 컴포넌트를 마이그레이션했습니다.
+- 대부분의 새로운 코드를 Typescript로 작성하고 있습니다.
+
+### 3.5. Strict Mode 지원
