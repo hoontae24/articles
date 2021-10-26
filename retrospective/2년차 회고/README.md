@@ -1,5 +1,5 @@
 ---
-title: 풀스택 개발자 2년차 회고
+title: 참을 수 없는 코드의 가벼움(2년차 개발자 회고)
 description:
 date: 2021-10-26
 category: retrospective
