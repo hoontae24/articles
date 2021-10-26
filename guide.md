@@ -14,4 +14,6 @@
   - 파일 최상단에는 메타정보 헤더를 포함한다.(`YAML` 포맷으로 작성)
     - 필수 항목: `title`, `date`, `category`
     - 선택 항목: `description`, `tags`, `seriesId`, `thumbnail`
-- `img`: 이미지 리소스용 폴더, 포스트에서 `./img/[img.png]`처럼 상대경로로 단순하게 접근할 수 있도록 같은 폴더에 위치
+- `img`: 
+  - 이미지 리소스용 폴더
+  - `README.md`에서 `./img/[img.png]`와 같이 상대경로이며 하위 경로에 위치하여 직관적으로 접근할 수 있도록 함
