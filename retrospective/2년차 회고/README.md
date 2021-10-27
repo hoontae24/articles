@@ -6,6 +6,8 @@ category: retrospective
 tags: [retrospective]
 ---
 
+![book-cover](./img/book-cover.jpg "참을 수 없는 존재의 가벼움, 밀란 쿤데라")
+
 - 기능 개발 / 도메인 이해
   - 기능은 어떻게든 개발할 수 있더라
   - 사용자가 원하는 기능은 늘 퍼블릭하지는 않다
