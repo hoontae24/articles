@@ -1,7 +1,7 @@
 ---
 title: 참을 수 없는 코드의 가벼움(3년차 개발자 회고)
 description:
-date: 2021-10-26
+date: 2021-10-31
 category: retrospective
 tags: [retrospective]
 ---
