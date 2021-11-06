@@ -12,6 +12,29 @@ JIT 컴파일러를 사용하는 V8과 같은 엔진에서는 개선된 부분�
 
 ## ArrayBuffer
 
+> 버퍼(buffer)는 데이터를 한 곳에서 다른 한 곳으로 전송하는 동안 일시적으로 그 데이터를 보관하는 메모리의 영역이다.
+
+**ArrayBuffer**의 의미적인 이해를 돕기 위해 **Buffer**의 뜻을 검색해봤습니다. Buffer와 Array가 결합된 ArrayBuffer는 "연속적인 데이터를 보관하는 메모리의 영역"정도로 이해할 수 있습니다. MDN에서는 "바이트로 구성된 배열"이라고 표현하고 있습니다.
+
+하지만 ArrayBuffer는 데이터를 직접 다루는 기능을 제공하지 않습니다. TypedArray나 DataView 등의 객체를 이용하여 ArrayBuffer에 할당된 공간을 특정 타입의 데이터로 읽거나 쓸 수 있습니다. (_마치 ArrayBuffer는 종이, 다른 도구는 펜과 잉크 같은 역할이라고나 할까요..._)
+
+```js
+const src = 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+
+fetch(src)
+  .then((res) => res.arrayBuffer())
+  .then((buffer) => console.log(buffer.byteLength)) // output: 13504
+```
+
+ 이미지를 바이너리로 다룰 때, ArrayBuffer를 이용할 수 있을 것입니다. 간단히 실험해볼 수 있는 예시로 구글 홈페이지의 로고를 `fetch` API로 가져와 `ArrayBuffer`로 변환하는 코드입니다. 이미지 데이터의 버퍼 길이와 실제 구글 로고의 용량을 비교해보면 같은 것을 볼 수 있습니다. 실제 데이터의 용량만큼 ArrayBuffer의 길이가 할당됩니다.
+
+```js
+const buffer = new ArrayBuffer(8);
+console.log(buffer.byteLength); // output: 8
+```
+
+`ArrayBuffer(8)` 생성자를 이용해 고정된 길이(8)를 가진 객체를 직접 생성할 수도 있습니다.
+
 ## TypedArray
 
 ## Examples for Threejs
