@@ -26,7 +26,7 @@ fetch(src)
   .then((buffer) => console.log(buffer.byteLength)) // output: 13504
 ```
 
- 이미지를 바이너리로 다룰 때, ArrayBuffer를 이용할 수 있을 것입니다. 간단히 실험해볼 수 있는 예시로 구글 홈페이지의 로고를 `fetch` API로 가져와 `ArrayBuffer`로 변환하는 코드입니다. 이미지 데이터의 버퍼 길이와 실제 구글 로고의 용량을 비교해보면 같은 것을 볼 수 있습니다. 실제 데이터의 용량만큼 ArrayBuffer의 길이가 할당됩니다.
+ 이미지를 바이너리로 다룰 때, ArrayBuffer를 이용할 수 있습니다. 간단히 예제로 구글 홈페이지의 로고를 `fetch` API로 가져와 `ArrayBuffer`로 변환하는 코드입니다. 이미지 데이터의 버퍼 길이와 실제 구글 로고의 용량을 비교해보면 같은 것을 볼 수 있습니다. 실제 데이터의 용량만큼 ArrayBuffer가 생성됩니다.
 
 ```js
 const buffer = new ArrayBuffer(8);
