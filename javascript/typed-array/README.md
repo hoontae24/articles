@@ -55,4 +55,20 @@ fetch(src)
 
 ## TypedArray
 
+앞서 ArrayBuffer에 데이터를 직접 수정할 수 없다고 했습니다. ArrayBuffer를 다루기 위한 방법으로 TypedArray에 대해 알아보겠습니다. TypedArray는 "형식화 배열"이라고 번역되며 의미는 이름에서와 같이 "타입이 지정된 배열"로 이해할 수 있습니다.
+
+```js
+const buffer = new ArrayBuffer(8);
+
+const int8arr = new Int8Array(buffer);
+console.log(int8arr); // Int8Array [0, 0, 0, 0, 0, 0, 0, 0]
+
+const int16arr = new Int16Array(buffer);
+console.log(int16arr); // Int16Array [0, 0, 0, 0]
+```
+
+`ArrayBuffer` 객체를 생성하고 그 버퍼에 대해서 TypedArray 중 하나인 `Int8Array`객체를 생성했습니다. **Int8Array**는 **2의 보수 8비트 부호있는 정수의 배열**입니다. 현재 선언된 버퍼의 크기는 `8bytes`이고 Int8Array의 각 요소의 크기는 `8bits === 1bytes`이므로 길이가 `8`인 Int8Array가 생성되었습니다.
+
+이어서 같은 버퍼를 참조하여 생성된 **Int16Array**는 길이가 `4`입니다. Int16Array의 각 요소의 크기는 `2bytes`이기 때문입니다.
+
 ## Examples for Threejs
