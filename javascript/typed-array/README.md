@@ -1,5 +1,5 @@
 ---
-title: Typed Array
+title: Array는 아니지만 더 배열 같은... ArrayBuffer와 TypedArray
 description:
 date: 2021-11-13
 category: javascript
@@ -14,7 +14,7 @@ JIT 컴파일러를 사용하는 V8과 같은 엔진에서는 개선된 부분�
 
 ## ArrayBuffer
 
-> 버퍼(buffer)는 데이터를 한 곳에서 다른 한 곳으로 전송하는 동안 일시적으로 그 데이터를 보관하는 메모리의 영역이다.
+> "버퍼(buffer)"는 데이터를 한 곳에서 다른 한 곳으로 전송하는 동안 일시적으로 그 데이터를 보관하는 메모리의 영역이다.
 
 **ArrayBuffer**의 의미적인 이해를 돕기 위해 **Buffer**의 뜻을 검색해봤습니다. Buffer와 Array가 결합된 ArrayBuffer는 "연속적인 데이터를 보관하는 메모리의 영역"정도로 이해할 수 있습니다. MDN에서는 "바이트로 구성된 배열"이라고 표현하고 있습니다.
 
@@ -94,4 +94,15 @@ console.log(int16arr); // Int16Array [256, 0, 0, 1]
 
 ## Examples for Threejs
 
+```js
+const geometry = new THREE.SphereGeometry(15, 32, 16);
+console.log(geometry.attributes.position.array); // Float32Array [-0, 15, 0, -0, 15, 0, -0, 15, 0, -0, …]
+```
+
+**WebGL**을 이용한 3D 시각화 라이브러리 [Threejs](https://threejs.org)의 코드에서 TypedArray를 사용합니다. 3차원의 입체 도형을 나타내기 위해 Vertex의 위치 정보를 Float32Array에 담아 사용합니다. 3D 이미지 자료이기 때문에 큰 용량의 데이터를 처리할 때에 TypedArray를 쓰는 것이 장점이 있을 것으로 보입니다.
+
 ## 마치며
+
+이번 글에서는 ArrayBuffer와 TypedArray에 대해서 간단히 살펴봤습니다. 프로그래밍을 하다보면 성능에 대한 문제를 마주칠 때가 많은데, 그런 경우에 자료구조나 메모리를 다루는 방법이 필요합니다. ArrayBuffer를 통해 자바스크립트에서도 연속적인 메모리 영역에 저장된 데이터를 다룰 수 있다는 것을 살짝 찍먹해보았습니다.
+
+ArrayBuffer가 추가된 것처럼 자바스크립트는 계속해서 발전하고 있습니다. 약한 타입과 스크립트 기반의 언어로서 단점이 많이 있기도 하지만, 많은 개발자들이 계속해서 고민하면서 한계를 점점 넓혀가고 있습니다. 새로운 것을 배우는 것이 때로는 소소한 즐거움이 되는 것 같습니다.
