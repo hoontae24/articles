@@ -1,10 +1,12 @@
 ---
 title: Typed Array
 description:
-date: 2021-11-12
+date: 2021-11-13
 category: javascript
 tags: [javascript, arraybuffer, typedarray]
 ---
+
+![arraybuffer-typedarray](./img/arraybuffer-typedarray.png)
 
 프로그래밍에 있어 빠질 수 없는 자료구조 중 하나는 바로 "배열"일 것입니다. 자바스크립트에는 "Array"라는 전역 객체로 배열을 사용할 수 있습니다. (_"Array"를 번역하면 "배열"이지만_) 실제로 자바스크립트의 Array는 일반적으로 컴퓨터과학에서 다루는 "[배열](https://ko.wikipedia.org/wiki/배열)"과는 다릅니다. JS Array는 기본적으로 객체 타입이며, 연속적인 데이터 저장을 보장하지 않습니다.
 
