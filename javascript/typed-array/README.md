@@ -1,14 +1,14 @@
 ---
 title: Typed Array
 description:
-date: 2021-11-06
+date: 2021-11-12
 category: javascript
 tags: [javascript, arraybuffer, typedarray]
 ---
 
 프로그래밍에 있어 빠질 수 없는 자료구조 중 하나는 바로 "배열"일 것입니다. 자바스크립트에는 "Array"라는 전역 객체로 배열을 사용할 수 있습니다. (_"Array"를 번역하면 "배열"이지만_) 실제로 자바스크립트의 Array는 일반적으로 컴퓨터과학에서 다루는 "[배열](https://ko.wikipedia.org/wiki/배열)"과는 다릅니다. JS Array는 기본적으로 객체 타입이며, 연속적인 데이터 저장을 보장하지 않습니다.
 
-JIT 컴파일러를 사용하는 V8과 같은 엔진에서는 개선된 부분이 있지만, 연속성과 고정 타입을 늘 강제할 수는 없습니다. 만약 파일이나 이미지 등의 바이너리 데이터를 다룬다면 연속적인 데이터 구조를 사용하는 것이 성능에 도움이 될 수 있습니다. 그러한 문제들을 위해 ArrayBuffer와 TypedArray를 사용하면 해결할 수 있습니다.
+JIT 컴파일러를 사용하는 V8과 같은 엔진에서는 개선된 부분이 있지만, 연속성과 고정 타입을 늘 강제할 수는 없습니다. 만약 파일이나 이미지 등의 바이너리 데이터를 다룬다면 연속적인 메로리에 저장된 데이터 구조를 사용하는 것이 성능에 도움이 될 수 있습니다. 그러한 문제를 위해 ArrayBuffer와 TypedArray를 사용할 수 있습니다.
 
 ## ArrayBuffer
 
@@ -53,7 +53,7 @@ fetch(src)
 
 위 예제처럼 ArrayBuffer에 담긴 데이터를 이용해 Blob으로 변환해 이용할 수도 있습니다. 구글 메인 페이지에서 개발자도구로 실행해보세요. 실제로 ArrayBuffer를 위처럼 사용하지는 않지만 데이터가 저장되는 공간을 다루는 ArrayBuffer를 다양하게 활용할 수 있을 것입니다.
 
-## TypedArray
+## TypedArray (Int8Array, Int16Array)
 
 앞서 ArrayBuffer에 데이터를 직접 수정할 수 없다고 했습니다. ArrayBuffer를 다루기 위한 방법으로 TypedArray에 대해 알아보겠습니다. TypedArray는 "형식화 배열"이라고 번역되며 의미는 이름에서와 같이 "타입이 지정된 배열"로 이해할 수 있습니다.
 
@@ -61,14 +61,35 @@ fetch(src)
 const buffer = new ArrayBuffer(8);
 
 const int8arr = new Int8Array(buffer);
-console.log(int8arr); // Int8Array [0, 0, 0, 0, 0, 0, 0, 0]
-
 const int16arr = new Int16Array(buffer);
+
+console.log(int8arr); // Int8Array [0, 0, 0, 0, 0, 0, 0, 0]
 console.log(int16arr); // Int16Array [0, 0, 0, 0]
 ```
 
-`ArrayBuffer` 객체를 생성하고 그 버퍼에 대해서 TypedArray 중 하나인 `Int8Array`객체를 생성했습니다. **Int8Array**는 **2의 보수 8비트 부호있는 정수의 배열**입니다. 현재 선언된 버퍼의 크기는 `8bytes`이고 Int8Array의 각 요소의 크기는 `8bits === 1bytes`이므로 길이가 `8`인 Int8Array가 생성되었습니다.
+`ArrayBuffer` 객체를 생성하고 그 버퍼에 대해서 TypedArray 중 하나인 `Int8Array`객체를 생성했습니다. **Int8Array**는 **2의 보수 8비트 부호있는 정수의 배열**입니다. 현재 선언된 버퍼의 크기는 `8bytes`이고 Int8Array의 각 요소의 크기는 `8bits === 1byte`이므로 길이가 `8`인 Int8Array가 생성되었습니다.
 
 이어서 같은 버퍼를 참조하여 생성된 **Int16Array**는 길이가 `4`입니다. Int16Array의 각 요소의 크기는 `2bytes`이기 때문입니다.
 
+```js
+const buffer = new ArrayBuffer(8);
+
+const int8arr = new Int8Array(buffer);
+const int16arr = new Int16Array(buffer);
+
+int8arr[1] = 1;
+int16arr[3] = 1;
+
+console.log(int8arr); // Int8Array [0, 1, 0, 0, 0, 0, 1, 0]
+console.log(int16arr); // Int16Array [256, 0, 0, 1]
+```
+
+이번 실행에서는 실제로 값을 변경해봅니다. 각각의 배열의 값을 변경했지만, 같은 ArrayBuffer를 공유하고 있기 때문에 두 배열이 영향을 받습니다. ArrayBuffer의 또 다른 **뷰**인 [DataView](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/DataView)를 이용하면 **엔디언**방식을 지정하여 값을 다룰 수 있습니다. (엔디언에 관한 자세한 정보는 [여기](https://developer.mozilla.org/ko/docs/Glossary/Endianness)를 참고해주세요.)
+
+![buffer and typedarray](./img/buffer-and-typedarray.jpeg)
+
+이처럼 형식화 배열이 ArrayBuffer를 어떻게 이용하는 지 살펴보았습니다. 실제로 데이터를 다룰 때에 같은 buffer를 가지고 다른 배열에서 접근하여 사용할 일은 없을 것이지만요.
+
 ## Examples for Threejs
+
+## 마치며
