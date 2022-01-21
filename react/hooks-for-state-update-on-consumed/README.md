@@ -143,7 +143,7 @@ export const usePost = (postId: number): Store<Post> => {
 
 ## 3. 사용하는 상태만 추적하는 Hook
 
-SWR을 사용하며 위와 같은 상황에서 리렌더링이 되지 않는 것을 보고 [SWR의 코드](https://github.com/vercel/swr/blob/7dfd89081d818cba940b7d6bc786e9cdcba24c8e/src/utils/state.ts#L12)에서 아래와 같은 커스텀훅을 발견하였습니다.
+SWR을 사용하며 위와 같은 상황에서 리렌더링이 되지 않는 것을 보고 SWR의 코드[[1](https://github.com/vercel/swr/blob/7dfd89081d818cba940b7d6bc786e9cdcba24c8e/src/use-swr.ts#L516), [2](https://github.com/vercel/swr/blob/7dfd89081d818cba940b7d6bc786e9cdcba24c8e/src/utils/state.ts#L12)]에서 아래와 같은 커스텀훅을 발견하였습니다.
 
 ```ts
 const useStateWithDeps = <Data, Error, S = State<Data, Error>>(
@@ -218,8 +218,6 @@ const useSomeData = () => {
 ```
 
 실제 코드에서 오늘의 핵심 주제인 컴포넌트 업데이트 관점에서 코드를 살펴봅시다. 먼저 우리의 커스텀훅(`useSomeData`)은 `data`, `error`, `isValidating`이라는 3개의 상태를 제공합니다.
-
-> ???????각각의 상태는 [Getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)로 제공됩니다.
 
 ```ts
 const rerender = useState<Record<string, unknown>>({})[1];
