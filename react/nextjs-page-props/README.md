@@ -6,3 +6,5 @@ category: react
 tags: [react, nextjs]
 # thumbnail:
 ---
+
+![NextJS](./img/nextjs.png)
