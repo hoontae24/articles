@@ -13,6 +13,8 @@ Nextjs는 리액트 생태계에서 가장 많이 사용하는 프레임워크 �
 
 여러 기능 중 SSR에서는 DataFetch를 쉽게 구현할 수 있습니다. SSR 페이지에서 초기 데이터를 로드하려면 `getServerSideProps` 함수를 정의하여 페이지 컴포넌트의 `Props`로 주입받을 수 있습니다. `getServerSideProps`를 사용해보고 동작하는 방식을 알아보겠습니다.
 
+> 예시로 작성된 코드 전체는 [여기](https://github.com/hoontae24/blog-examples/tree/main/react/nextjs-getServerSideProps)에서 볼 수 있습니다.
+
 ## 사용법
 
 먼저 간단한 페이지 컴포넌트를 만들고, 페이지 컴포넌트 파일에 `getServerSideProps`라는 이름으로 함수를 정의합니다.
@@ -86,11 +88,11 @@ export const getServerSideProps: GetServerSideProps<IndexPageProps> = async () =
 export default IndexPage;
 ```
 
-리액트에서 다른 도구를 사용하지 않는다면 `useState`, `useEffect` 등으로 데이터를 불러와 상태로 다루게 됩니다. `getServerSideProps`를 이용하면 데이터를 불러오고 관리하는 부분을 리액트 라이프사이클에서 분리하고, 페이지가 렌더링되기 전에 데이터를 불러와 Placeholder를 렌더링하지 않아도 됩니다.
+만약 리액트에서 다른 도구를 사용하지 않는다면 `useState`, `useEffect` 등으로 데이터를 불러와 상태로 다루게 됩니다. 하지만 `getServerSideProps`를 이용하면 데이터를 불러오고 관리하는 부분을 리액트 라이프사이클에서 분리하고, 페이지가 렌더링되기 전에 데이터를 불러와 Placeholder를 렌더링하지 않아도 됩니다.
 
 ## 렌더링 과정에서의 동작 알아보기
 
-위 예시 코드에서 `getServerSideProps` 함수를 컴포넌트 내에 정의했지만, 컴포넌트의 리액트 라이프사이클과는 분리되어 있음을 알 수 있습니다. 또한 Nextjs에서 과거 Data Fetching을 위해 사용했던 `getInitialProps`는 컴포넌트의 static method로 정의된 것과 다르게 `export`를 사용하고 있습니다.
+위 예시 코드에서 `getServerSideProps` 함수를 컴포넌트 내에 정의했지만, 리액트 컴포넌트의 라이프사이클과는 분리되어 있음을 알 수 있습니다. 또한 Nextjs에서 과거 Data Fetching을 위해 사용했던 `getInitialProps`는 컴포넌트의 `static method`로 정의된 것과 다르게 `export`를 사용하고 있습니다.
 
 위 예시 코드에서 함수가 호출되는 것을 디버깅하기 위해 로그를 찍어보겠습니다. 함수 컴포넌트 내부와 `getServerSideProps` 함수 내에서 디버깅 로그를 남깁니다.
 
@@ -124,17 +126,19 @@ Logging from IndexPage Component
 
 간단한 디버깅으로 알 수 있는 것은 Next가 `getServerSideProps` 함수를 먼저 호출하고, 페이지 컴포넌트를 렌더링합니다. 새로고침을 하면 페이지 초기 진입만 반복적으로 이루어지므로, 브라우저 콘솔에서 나타난 로그는 hydration 과정에서 페이지 컴포넌트의 렌더링 시점에 호출된 것으로 보입니다.
 
-이번에는 페이지 컴포넌트 파일 루트 영역에 변수 하나를 추가합니다. 그리고 각각의 로그에서 변수를 출력하도록 합니다.
+이번에는 페이지 컴포넌트 파일의 루트 영역에 변수 하나를 추가합니다. 그리고 각각의 로그에서 변수를 출력하도록 합니다.
 
 ```tsx
+let count = 0;
+
 const IndexPage = () => {
-  console.log("Logging from IndexPage Component");
+  console.log("Logging from IndexPage Component", ++count);
   return (
     // ...
   )
 }
 export const getServerSideProps = async () => {
-  console.log("Logging from getServerSideProps");
+  console.log("Logging from getServerSideProps", ++count);
   return {
     // ...
   };
@@ -160,11 +164,11 @@ Logging from getServerSideProps 5
 Logging from IndexPage Component 6
 ```
 
-Nodejs 런타임과 브라우저 런타임의 차이로 인해 로그가 다르게 나타납니다. 브라우저 콘솔에서는 계속 `1`이라는 값이 출력됩니다. 새로고침을 할 때 마다 hydration 과정이 새로 진행되기 때문에(서버에서 JS를 새로 불러오기 때문에) 매번 모듈의 값이 초기화 됩니다. 반대로 Next는 모듈이 서버 자원으로 로드되기 때문에 모듈의 변수가 지속됩니다. 그래서 함수가 호출될 때 마다 `count` 변수에 담긴 값이 계속 유지되고 변경됩니다.
+Nodejs 런타임과 브라우저 런타임의 차이로 인해 로그가 다르게 나타납니다. 브라우저 콘솔에서는 계속 `1`이라는 값이 출력됩니다. 새로고침을 할 때 마다 hydration 과정이 새로 진행되기 때문에(서버에서 JS를 새로 불러오기 때문에) 매번 모듈에 선언된 `count` 값이 초기화 됩니다. 반대로 Next는 모듈이 서버 자원으로 로드되기 때문에 서버가 실행되는 동안 모듈의 변수가 지속됩니다. 그래서 함수가 호출될 때 마다 `count` 변수에 담긴 값이 계속 유지되고 변경됩니다.
 
 ## 라우팅 과정에서의 동작 알아보기
 
-Next는 파일 기반의 Page 라우팅을 지원합니다. `src/pages` 폴더 하위의 파일 트리 구조를 그대로 라우팅에 매핑시켜 줍니다. 중요한 것은 SPA의 특징인 Client Side Routing 역시 제공된다는 것입니다. 예시에서 새로운 페이지 컴포넌트 파일을 추가해보겠습니다. 그리고 기존 컴포넌트에 새로운 페이지로 전환하는 링크를 추가합니다.
+Next는 파일 기반의 Page 라우팅을 지원합니다. `src/pages` 폴더 하위의 파일 트리 구조를 그대로 라우팅에 매핑시켜 줍니다. 또한 SPA의 특징인 Client Side Routing 역시 제공된다는 것입니다. 예시 코드에 새로운 페이지 컴포넌트 파일을 추가해보겠습니다. 그리고 기존 컴포넌트에 새로운 페이지로 전환하는 링크를 추가합니다.
 
 ```tsx
 // src/pages/about.tsx
@@ -196,7 +200,7 @@ const IndexPage = () => {
 };
 ```
 
-이전에 작성했던 디버깅 코드가 그대로 있는 상태에서 이번에는 새로고침이 아닌 페이지 전환을 반복해봅니다. `index` -> `about` -> `index` 순서로 왔다갔다 한 후에 로그를 살펴봅시다. `/index` 페이지를 방문할 때, 디버깅 로그가 찍힙니다.
+이전에 작성했던 디버깅 코드가 그대로 있는 상태에서 이번에는 새로고침이 아닌 페이지 전환을 반복해봅니다. `index` -> `about` -> `index` 순서로 왔다갔다 한 후에 로그를 살펴봅시다. `/index` 페이지를 방문할 때마다 디버깅 로그가 찍힙니다.
 
 ```sh
 # 브라우저 콘솔
@@ -213,14 +217,14 @@ Logging from getServerSideProps 3
 Logging from getServerSideProps 4
 ```
 
-이전에 새로고침만 했을 때와는 다른 결과를 보여줍니다. 약간 값은 다를 수 있지만, 최초 진입 이후에 브라우저에서는 렌더링을, Next 서버에서는 `getServerSideProps`가 호출되는 것을 확인할 수 있습니다. 브라우저에서 CSR이 진행되는 과정에서 서버는 `getServerSideProps`를 호출하고 데이터를 네트워크로 보내줍니다. 브라우저는 해당 데이터를 받아 `IndexPage`의 `props`를 변경합니다.
+이전에 새로고침만 했을 때와는 다른 결과를 보여줍니다. 최초 진입 이후에 브라우저에서는 렌더링이 진행되고 Next 서버에서는 `getServerSideProps`가 호출되는 것을 확인할 수 있습니다. 브라우저에서 CSR이 진행되는 과정에서 서버는 `getServerSideProps`를 호출하고 데이터를 네트워크로 보내줍니다. 브라우저는 해당 데이터를 받아 `IndexPage`의 `props`를 변경합니다.
 
 브라우저의 개발자도구 네트워크 탭에서 `/index` 페이지로 전환할 때 마다 데이터를 요청하고 응답받는 것을 확인할 수 있습니다.
 
 ![Data Fetching on CSR](./img/network-tab.png)
 ![Data Fetching on CSR](./img/network-tab-preview.png)
 
-`getServerSideProps`라는 이름처럼 서버에서 `props`를 가져오는 방식입니다.
+`getServerSideProps`라는 이름처럼 서버에서 페이지 컴포넌트의 초기 렌더링 데이터를 서버에서 `props`로 가져오는 것입니다.
 
 > 앞에서 잠깐 언급했던 `getInitialProps`는 페이지에 진입할 때 마다, 렌더링하는 컨텍스트에서 함수가 실행됩니다. \
 > 만약 새로고침이나 첫 페이지 진입처럼 서버에서 렌더링이 수행된다면 서버에서 `getInitialProps`가 호출되고, 브라우저 라우팅으로 진입하여 브라우저에서 렌더링이 수행된다면 브라우저에서 `getInitialProps`가 수행됩니다. \
@@ -237,7 +241,8 @@ Logging from getServerSideProps 4
 
 먼저 위 예시 기준으로는 `<Link>` 컴포넌트부터 출발합니다.
 
-> 살펴볼 코드에 집중하기 위해 생략된 부분은 "// ..." 등의 주석으로 표시합니다.
+> 살펴볼 코드에 집중하기 위해 생략된 부분은 "// ..." 등의 주석으로 표시합니다. \
+> 코드는 [Next.js Github](https://github.com/vercel/next.js/tree/canary/packages/next)에서 찾아볼 수 있습니다.
 
 ### 1. Link 컴포넌트 클릭([Code](https://github.com/vercel/next.js/blob/5384171bb651ab24398168ac26f76fac37a0f841/packages/next/client/link.tsx#L435))
 
@@ -297,7 +302,7 @@ let router = React.useContext(RouterContext);
 </RouterContext.Provider>
 ```
 
-`RouterContext`의 값을 주입하고 있는 부분에서 `router` 객체를 추적합니다. `makePublicRouterInstance`함수는 라우터 객체를 Next에서 필요한 동작을 위한 clone 과정인 것 같습니다. 라우터 객체의 핵심 기능은 `router` 변수에 담긴 객체입니다.
+`RouterContext`의 값을 주입하고 있는 부분에서 `router` 객체를 추적합니다. `makePublicRouterInstance`함수는 라우터 객체를 Next에서 필요한 동작을 위한 clone 과정인 것 같습니다. 라우터 객체의 핵심은 `router` 변수에 담긴 객체입니다.
 
 ```tsx
 // next/client/index.tsx#L397
@@ -391,7 +396,7 @@ this.components[route] = routeInfo;
 return routeInfo;
 ```
 
-서버로부터 갱신된 `props`는(실제로는 `props.pageProps`에 컴포넌트 `props`가 담겨 있음) `routeInfo` 객체에 할당되어 `return`됩니다. 다시 `getRouteInfo`를 호출했던 부분을 돌아가 `routeInfo` 객체를 추적합니다.
+서버로부터 갱신된 `props`는(실제로는 `props.pageProps`에 페이지 컴포넌트의 `props`가 담겨 있음) `routeInfo` 객체에 할당되어 `return`됩니다. 다시 `getRouteInfo`를 호출했던 부분을 돌아가 `routeInfo` 객체를 추적합니다.
 
 ### 7. 변경된 데이터를 컴포넌트에 적용하기([Code](https://github.com/vercel/next.js/blob/5384171bb651ab24398168ac26f76fac37a0f841/packages/next/shared/lib/router/router.ts#L1310))
 
@@ -430,7 +435,7 @@ private set(
 }
 ```
 
-`set` 메소드에서는 다시 `sub` 메소드를 호출합니다. `sub` 메소드는 `Router` 클래스 생성자에서 인자로 받아 할당되는 콜백함수 입니다. `Router` 생성자를 호출하는 부분을 따라가면 `sub` 메소드로 넘겨주는 매개변수를 찾을 수 있습니다.
+`set` 메소드에서는 다시 `sub` 메소드를 호출합니다. `sub` 메소드는 `Router` 클래스 생성자에서 `subscription` 인자를 받아 할당되는 콜백함수 입니다. `Router` 생성자를 호출하는 부분을 따라가면 `sub` 메소드로 넘겨주는 매개변수를 찾을 수 있습니다.
 
 ```tsx
 // next/client/index.tsx#L397
@@ -568,4 +573,4 @@ return this.pipe((ctx) => this.renderToResponse(ctx), {
 
 Next는 리액트 개발자가 편하게 이용할 수 있는 기능을 제공하는 유용한 프레임워크입니다. 오늘은 Next가 제공하는 `getServerSideProps` 함수가 어떤 동작을 하는지, 어떤 방식으로 구현되었는 지 살펴보았습니다. 코드를 살펴보는 부분에서는 내용이 다소 복잡하게 전달되었을 것 같습니다. 시간을 내어 한번 코드를 따라가면 어떤 메커니즘으로 동작하는 지 이해할 수 있을 것입니다.
 
-단순히 기능을 사용하는 프레임워크 사용자 입장에서 뿐만 아니라, 어떤 식으로 동작하는지 추적해보고 이와 같은 기능을 만들 수 있는 개발자가 되기 위해서 더 공부해야할 것 같습니다. 긴 글 읽어주셔서 감사합니다.
+단순히 기능을 사용하는 프레임워크 사용자 입장에서 뿐만 아니라, 어떤 식으로 동작하는지 추적해보고 이와 같은 기능을 만들 수 있는 개발자가 되기 위해서 더 공부해야할 것 같습니다. 리액트와 Next를 사용하는 분이 있다면 도움이 되었기를 바랍니다. 긴 글 읽어주셔서 감사합니다.
