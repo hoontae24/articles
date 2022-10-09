@@ -37,7 +37,7 @@ https://github.com/company-user/company-project/blob/ref/src/app.js#L10
 
 해당 확장앱이 제3자인 제가 수정하여 기여할 수 있는 정책으로 되어있는지 확인해 보겠습니다. 일반 어플리케이션과 다르게 확장앱의 경우에는 오픈소스로 운영되는 경우가 있기 때문에 직접 기여할 수 있을 것입니다. 다행히 해당 확장앱의 [Github Repo](https://github.com/Microsoft/vscode-pull-request-github)에서 [Contributing](https://github.com/Microsoft/vscode-pull-request-github) 관련 내용을 확인할 수 있었습니다. 아마 MS에서 개발하고 있기 때문에 문서가 잘 정리된 것으로 보입니다.
 
-![Contributing](img/github-pull-requests-and-issues-contributing.png)
+![Contributing](./img/github-pull-requests-and-issues-contributing.png)
 
 확장앱을 수정하기 위해서 개발 모드로 작업을 진행할 수 있게 가이드를 제공하고 있습니다. 확장앱의 모든 환경을 다 이해하진 못해도 해당 가이드를 따라 기능을 수정해보겠습니다.
 
